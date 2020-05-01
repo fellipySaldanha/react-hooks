@@ -1,17 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import {TimeService} from '../data/services/TimeService';
-
-const _selectedVideo = {
-        id: 1,
-        title:"City",
-        duration: 20,
-        url:"https://storage.coverr.co/videos/lcGm59E00q5uzDUiDP5WHgPvZQVVw02BB3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjExNDMyN0NEOTRCMUFCMTFERTE3IiwiaWF0IjoxNTg3ODU0MDQxfQ.wA6-_2TFGtae2daJUZnurFOFmANLutaLMM26AvpqMIY",
-        cover: "https://storage.coverr.co/thumbnails/coverr-cinematic-empty-street-in-argentina-1587757179229"
-}
+import {videoStore} from '../data/video/VideoContext';
 
 export default function VideoPlayer(){
 
-    const video = _selectedVideo;
+    const [videoState] = useContext(videoStore);
+    const video = videoState.selectedVideo;
     const videoRef = useRef();
     const progressTimer = useRef();
     const [isPlaying, setPlay] = useState(false);
