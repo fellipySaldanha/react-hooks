@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {videoStore} from '../data/video/VideoContext';
 
 export default function NewVideoForm (){
     
+    const [, videoDispatch] = useContext(videoStore);
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState('');
     const [url, setUrl] = useState('');
@@ -14,6 +16,10 @@ export default function NewVideoForm (){
             url,
             cover
         };
+        videoDispatch({
+            type: 'add',
+            value: newVideo
+        });
         reset();
     }
 
@@ -29,13 +35,13 @@ export default function NewVideoForm (){
             <label>Titulo:</label>
             <input type='text' value={title} onChange={(event) => setTitle(event.target.value)}/>
            
-            <label>Titulo:</label>
+            <label>Duração:</label>
             <input type='text' value={duration} onChange={(event) => setDuration(event.target.value)}/>
 
-            <label>Titulo:</label>
+            <label>Vídeo:</label>
             <input type='text' value={url} onChange={(event) => setUrl(event.target.value)}/>
 
-            <label>Titulo:</label>
+            <label>Capa:</label>
             <input type='text' value={cover} onChange={(event) => setCover(event.target.value)}/>
 
             <button onClick={save}>Salvar</button>
